@@ -1,0 +1,66 @@
+# EventType: 11114033
+#
+# Descriptor: {[[B0]nos -> (Inflat0 -> mu+ mu-) (K*(892)0 -> K+ pi-)]cc, [[B0]os -> (Inflat0 -> mu- mu+) (K*(892)~0 -> K- pi+)]cc}
+#
+# NickName: InflatonInCODEX
+#
+# Cuts: None
+# FullEventCuts: LoKi::FullGenEventCut/InflatonInCODEX
+#
+#
+# InsertPythonCode:
+# from Gaudi.Configuration import *
+# from Configurables import LoKi__FullGenEventCut
+# from Configurables import LHCb__ParticlePropertySvc as ParticlePropertySvc
+# ParticlePropertySvc().Particles = [ "H_10     89      36  0.0        1.50   8.95e-6      Inflat0   0   0.000000e+000" ]
+# ApplicationMgr().ExtSvc += [ ParticlePropertySvc() ]
+# Generation(genAlgName).addTool( LoKi__FullGenEventCut, "InflatonInCODEX" )
+# tracksInAcc = Generation(genAlgName).InflatonInCODEX
+# tracksInAcc.Code = " count ( isGoodA1 ) > 0 "
+# tracksInAcc.Preambulo += [
+#       "from GaudiKernel.SystemOfUnits import GeV, mrad, meter, millimeter",
+#       "GVX = LoKi.GenVertices.PositionX()",
+#       "GVY = LoKi.GenVertices.PositionY()",
+#       "GVZ = LoKi.GenVertices.PositionZ()",
+#       "OriginX = GFAPVX(GVX, 100 * meter)",
+#       "OriginY = GFAPVX(GVY, 100 * meter)",
+#       "OriginZ = GFAPVX(GVZ, 100 * meter)",
+#       "inVELO = (OriginZ > -290.0 * millimeter) & (OriginZ < 750.0 * millimeter) & ( (OriginX*OriginX + OriginY*OriginY) < 42.0*42.0 * millimeter * millimeter )",
+#       "inAcceptance = (GPHI > -260.8*mrad) & (GPHI < 260.8*mrad) & (GTHETA > 815.0*mrad) & (GTHETA < 1310.4*mrad)",
+#       "isGoodA1 = ( ( 'H_10' == GABSID ) & inAcceptance & inVELO )"
+#     ]
+# EndInsertPythonCode
+#
+# Documentation: File for B -> Inflaton (-> mu mu) Kst (K pi) in CODEX
+# EndDocumentation
+#
+# PhysicsWG: Exotica
+# Tested: Yes
+# Responsible: Alejandro Rodríguez
+# Email: alejandro.rodriguez.gonzalez@rai.usc.es
+# Date: 20260611
+#
+Alias      MyScalar    Inflat0
+Alias MyK*0      K*0
+Alias Myanti-K*0 anti-K*0
+
+ChargeConj MyScalar  MyScalar
+ChargeConj MyK*0 Myanti-K*0
+
+#
+Decay B0sig
+  1.000         MyK*0  MyScalar                 PHSP;
+Enddecay
+CDecay B-sig
+
+#
+Decay MyScalar
+  1.000         mu+      mu-                    PHSP; 
+Enddecay
+#
+Decay MyK*0
+  1.000    K+         pi-         VSS;
+Enddecay
+CDecay Myanti-K*0
+
+End

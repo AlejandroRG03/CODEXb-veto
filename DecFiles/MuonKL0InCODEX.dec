@@ -1,0 +1,37 @@
+# EventType: 38011800
+#
+# Descriptor: Muon_KL0_In_CODEX
+#
+# NickName: MuonKL0InCODEX
+#
+# Cuts: None
+# FullEventCuts: LoKi::FullGenEventCut/MuonOrKL0InCODEXAcceptance
+#
+#
+# InsertPythonCode:                                                                                           
+# from Gaudi.Configuration import *  
+# from Configurables import LoKi__FullGenEventCut
+# Generation(genAlgName).addTool( LoKi__FullGenEventCut, "MuonOrKL0InCODEXAcceptance" )
+# tracksInAcc = Generation(genAlgName).MuonOrKL0InCODEXAcceptance
+# tracksInAcc.Code = " ( count ( isGoodMuon ) > 0 ) | ( count ( isGoodKL0 ) > 0 ) "
+# tracksInAcc.Preambulo += [
+#       "from GaudiKernel.SystemOfUnits import GeV, mrad",
+#       "inAcceptance = (GPHI > -260.8*mrad) & (GPHI < 260.8*mrad) & (GTHETA > 815.0*mrad) & (GTHETA < 1310.4*mrad)",
+#       "isMuon = (GID == 'mu-') | (GID == 'mu+')",
+#       "isKL0  = (GID == 'K_L0')",
+#       "isGoodMuon = inAcceptance & isMuon",
+#       "isGoodKL0 = inAcceptance & isKL0"
+#     ]
+# EndInsertPythonCode 
+#
+#
+# Documentation: Events with a KL0 or MUON pointing at CODEX-b.
+# EndDocumentation
+#
+# PhysicsWG: Exotica
+# Tested: Yes
+# Responsible: Alejandro Rodríguez
+# Email: alejandro.rodriguez.gonzalez@rai.usc.es
+# Date: 20260417
+# CPUTime: < 1 min
+End

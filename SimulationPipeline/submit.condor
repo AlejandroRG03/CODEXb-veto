@@ -1,0 +1,31 @@
+# Script for submission to CONDOR. It is recommended to change the
+# run number when changing the magnet polarity.
+event_type               = 11114033
+run_number               = 90
+njobs                    = 500
+evts_per_job             = 500
+output_directory         = /lustre/LHCb/alejandro.rodriguez/simulated_velohits
+
+#
+# The configurable part ends here
+#
+# Define the arguments
+universe     = vanilla
+fen          = ($(process) * $(evts_per_job) + 1)
+full_odir    = $(output_directory)/$(event_type)/$(clusterid)/$(process)
+arguments    = --event-type $(event_type) --first-event-number $INT(fen) --run-number $(run_number) --nevents $(evts_per_job) --main-dir $(full_odir)
+executable   = main.py
+log          = logs/$(clusterid).$(process).log
+output       = logs/$(clusterid).$(process).out
+error        = logs/$(clusterid).$(process).error
+
+transfer_input_files = main.py
+
+
++jobflavour  = "test"
++flavour = "long"
+
+request_memory = 4096
+
+queue $(njobs)
+

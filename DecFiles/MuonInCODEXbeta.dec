@@ -1,0 +1,42 @@
+# EventType: 30011002
+#
+# Descriptor: Muon_In_CODEX
+#
+# NickName: MuonInCODEXbeta
+#
+# Cuts: None
+# FullEventCuts: LoKi::FullGenEventCut/MuonInCODEXAcceptance
+#
+#
+# InsertPythonCode:                                                                                           
+# from Gaudi.Configuration import *  
+# from Configurables import LoKi__FullGenEventCut
+# Generation(genAlgName).addTool( LoKi__FullGenEventCut, "MuonInCODEXAcceptance" )
+# tracksInAcc = Generation(genAlgName).MuonInCODEXAcceptance
+# tracksInAcc.Code = " ( count ( isGoodMuon ) > 0 ) "
+# tracksInAcc.Preambulo += [
+#       "from GaudiKernel.SystemOfUnits import GeV, mrad, meter, millimeter",
+#       "GVX = LoKi.GenVertices.PositionX()",
+#       "GVY = LoKi.GenVertices.PositionY()",
+#       "GVZ = LoKi.GenVertices.PositionZ()",
+#       "OriginX = GFAPVX(GVX, 100 * meter)",
+#       "OriginY = GFAPVX(GVY, 100 * meter)",
+#       "OriginZ = GFAPVX(GVZ, 100 * meter)",
+#       "inVELO = (OriginZ > -290.0 * millimeter) & (OriginZ < 750.0 * millimeter) & ( (OriginX*OriginX + OriginY*OriginY) < 42.0*42.0 * millimeter * millimeter )",
+#       "inAcceptance = (GPHI > -44.0*mrad) & (GPHI < 44.0*mrad) & (GTHETA > 1029.9*mrad) & (GTHETA < 1130.5*mrad)",
+#       "isMuon = (GABSID == 13)",
+#       "isGoodMuon = inAcceptance & inVELO & isMuon",
+#     ]
+# EndInsertPythonCode 
+#
+#
+# Documentation: Events with a MUON pointing at CODEX-b.
+# EndDocumentation
+#
+# PhysicsWG: Exotica
+# Tested: Yes
+# Responsible: Alejandro Rodríguez
+# Email: alejandro.rodriguez.gonzalez@rai.usc.es
+# Date: 20260417
+# CPUTime: < 1 min
+End

@@ -1,0 +1,42 @@
+# EventType: 38000801
+#
+# Descriptor: KL0_In_CODEX
+#
+# NickName: KL0InCODEXbeta
+#
+# Cuts: None
+# FullEventCuts: LoKi::FullGenEventCut/KL0InCODEXAcceptance
+#
+#
+# InsertPythonCode:                                                                                           
+# from Gaudi.Configuration import *  
+# from Configurables import LoKi__FullGenEventCut
+# Generation(genAlgName).addTool( LoKi__FullGenEventCut, "KL0InCODEXAcceptance" )
+# tracksInAcc = Generation(genAlgName).KL0InCODEXAcceptance
+# tracksInAcc.Code = " ( count ( isGoodKL0 ) > 0 ) "
+# tracksInAcc.Preambulo += [
+#       "from GaudiKernel.SystemOfUnits import GeV, mrad, millimeter, meter",
+#       "GVX = LoKi.GenVertices.PositionX()",
+#       "GVY = LoKi.GenVertices.PositionY()",
+#       "GVZ = LoKi.GenVertices.PositionZ()",
+#       "OriginX = GFAPVX(GVX, 100 * meter)",
+#       "OriginY = GFAPVX(GVY, 100 * meter)",
+#       "OriginZ = GFAPVX(GVZ, 100 * meter)",
+#       "inVELO = (OriginZ > -290.0 * millimeter) & (OriginZ < 750.0 * millimeter) & ( (OriginX*OriginX + OriginY*OriginY) < 42.0*42.0 * millimeter * millimeter )",
+#       "inAcceptance = (GPHI > -44.0*mrad) & (GPHI < 44.0*mrad) & (GTHETA > 1029.9*mrad) & (GTHETA < 1130.5*mrad)",
+#       "isKL0 = (GABSID == 130)",
+#       "isGoodKL0 = inAcceptance & inVELO & isKL0",
+#     ]
+# EndInsertPythonCode 
+#
+#
+# Documentation: Events with a KL0 pointing at CODEX-b.
+# EndDocumentation
+#
+# PhysicsWG: Exotica
+# Tested: Yes
+# Responsible: Alejandro Rodríguez
+# Email: alejandro.rodriguez.gonzalez@rai.usc.es
+# Date: 20260417
+# CPUTime: < 1 min
+End
