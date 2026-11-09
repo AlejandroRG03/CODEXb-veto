@@ -1,0 +1,48 @@
+# EventType: 40114060
+#
+# Descriptor: Higgs'0 -> ( A0 -> n0 anti-n0 ) ( A0 -> n0 anti-n0)
+#
+# NickName: Higgs_AA_AInCodex
+#
+# Cuts: None
+# FullEventCuts: LoKi::FullGenEventCut/A1InCodex
+#
+#
+# InsertPythonCode:                                                                                           
+# from Gaudi.Configuration import *  
+# from Configurables import LoKi__FullGenEventCut
+# Generation(genAlgName).addTool( LoKi__FullGenEventCut, "A1InCodex" )
+# tracksInAcc = Generation(genAlgName).A1InCodex
+# tracksInAcc.Code = " count ( isGoodA1 ) > 0 "
+# tracksInAcc.Preambulo += [
+#       "from GaudiKernel.SystemOfUnits import GeV, mrad",
+#       "inAcceptance = (GPHI > -260.8*mrad) & (GPHI < 260.8*mrad) & (GTHETA > 815.0*mrad) & (GTHETA < 1310.4*mrad)",
+#       "isGoodA1 = ( ( 'H_30' == GABSID ) & inAcceptance )"
+#     ]
+# EndInsertPythonCode
+#
+# ExtraOptions: HiggsNarrow,10GeV_2A14mu
+# ParticleValue: "H_20 88 35 0.0 125.0 2.06e-21 Higgs'0 35 0.0e+00" , "H_30 89 36 0.0   5.0 8.95e-6      A0 36 0.0e+00"
+#
+# Documentation: Higgs->2A1->4n. Simulated using Pythia's H_30 and H_20 particles redefined for our needs.
+# EndDocumentation
+#
+# PhysicsWG: Exotica
+# Tested: Yes
+# Responsible: Alejandro Rodríguez 
+# Email: alejandro.rodriguez.gonzalez@rai.usc.es
+# Date: 20260417
+# CPUTime: < 1 min
+#
+Alias      MyA    A0
+ChargeConj MyA MyA
+#
+Decay Higgs'0
+1.000       MyA    MyA     PHSP;
+Enddecay
+#
+Decay MyA
+1.000      n0   anti-n0    PHSP;
+Enddecay
+#
+End
